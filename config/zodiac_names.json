@@ -1,0 +1,50 @@
+{
+  "aries": {
+    "eng": "Aries",
+    "rus": "Овен"
+  },
+  "taurus": {
+    "eng": "Taurus", 
+    "rus": "Телец"
+  },
+  "gemini": {
+    "eng": "Gemini",
+    "rus": "Близнецы"
+  },
+  "cancer": {
+    "eng": "Cancer",
+    "rus": "Рак"
+  },
+  "leo": {
+    "eng": "Leo",
+    "rus": "Лев"
+  },
+  "virgo": {
+    "eng": "Virgo",
+    "rus": "Дева"
+  },
+  "libra": {
+    "eng": "Libra",
+    "rus": "Весы"
+  },
+  "scorpio": {
+    "eng": "Scorpio",
+    "rus": "Скорпион"
+  },
+  "sagittarius": {
+    "eng": "Sagittarius",
+    "rus": "Стрелец"
+  },
+  "capricorn": {
+    "eng": "Capricorn",
+    "rus": "Козерог"
+  },
+  "aquarius": {
+    "eng": "Aquarius",
+    "rus": "Водолей"
+  },
+  "pisces": {
+    "eng": "Pisces",
+    "rus": "Рыбы"
+  }
+}
