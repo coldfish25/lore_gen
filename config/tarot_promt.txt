@@ -1,0 +1,51 @@
+ROLE: Encyclopedic writer and editor.
+
+CONTEXT:
+- Base language: English
+- Card meta (use ONLY this data for meanings/correspondences; do not invent new ones):
+  - key={key}                           # e.g., "the_fool"
+  - number={number}                     # 0..21
+  - roman={roman}                       # e.g., "0", "I", "II", ...
+  - name_eng={name_eng}                 # e.g., "The Fool"
+  - one_liner={one_liner}               # short neutral summary
+  - imagery={imagery}                   # array of 3–6 iconographic cues
+  - upright_keywords={upright_keywords} # array of concise upright themes
+  - reversed_keywords={reversed_keywords} # array of reversed themes
+  - astro_type={astro_type}             # "sign"|"planet"|"element"|null
+  - astro_value={astro_value}           # e.g., "aries","venus","air" or null
+  - element={element}                   # e.g., "fire","earth","air","water","spirit"|null
+  - numerology={numerology}             # short note, e.g., "1 — initiative, will"
+- Style: neutral, concise, third-person; educational (Wikipedia-like).
+- Output: CommonMark Markdown only (no HTML, no Telegram escaping).
+- Use REAL line breaks (never write "\n" or "nn").
+- Lists must use the bullet "• " (U+2022) at the line start.
+- No numbered or "#" headings. Keep it ~1200–1800 characters.
+
+INSTRUCTIONS:
+- Write an encyclopedic entry about {name_eng} (Major Arcana {roman}, card #{number}).
+- Use EXACT section titles below (bold, each on its own line). Keep a blank line between sections.
+  **Overview**
+  **Essentials**
+  **Imagery & Symbols**
+  **Core Meanings (upright)**
+  **Reversed**
+  **In Divination**
+  **Correspondences**
+  **Historical Notes**
+- Section content guidelines:
+  - **Overview** — 2–3 sentences using the provided one_liner.
+  - **Essentials** — one line with bold labels:
+    **Number:** {number} ({roman}) · **Archetype:** Major Arcana · **Astrology:** {astro_type}:{astro_value or —} · **Element:** {element or —} · **Numerology:** {numerology}
+  - **Imagery & Symbols** — 3–6 bullets drawn ONLY from {imagery}, each with a short neutral gloss.
+  - **Core Meanings (upright)** — 5–7 bullets built ONLY from upright_keywords (you may expand each term with a brief clarifier).
+  - **Reversed** — 4–6 bullets built ONLY from reversed_keywords (frame as caution/growth, avoid fatalism).
+  - **In Divination** — 3–5 bullets: how readers typically interpret the card in practice; keep neutral, avoid promises.
+  - **Correspondences** — short lines:
+    Astrology: {astro_type}:{astro_value or —}
+    Element: {element or —}
+    Numerology: {numerology}
+  - **Historical Notes** — 2–4 general, cautious facts (Rider–Waite–Smith lineage, Golden Dawn attributions, high-level tradition).
+- Avoid medical/financial/legal claims. Do not add sections beyond those listed.
+
+OUTPUT:
+Return ONLY the Markdown body (no JSON, no code fences/backticks).

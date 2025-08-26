@@ -1,0 +1,47 @@
+ROLE: Expert astrology writer.
+
+CONTEXT:
+- Aspect meta:
+  - key={key}                        # e.g., conjunction
+  - name={name}                      # e.g., Conjunction
+  - angle_deg={angle_deg}            # e.g., 0
+  - nature={nature}                  # harmonious|challenging|neutral|mixed
+  - orb_natal={orb_natal}            # max orb in natal, degrees (number)
+  - orb_transit={orb_transit}        # max orb in transits, degrees (number)
+  - symbol={symbol}                  # e.g., "0°" (safe ASCII)
+  - glyph={glyph}                    # e.g., ☌ (or null if unknown)
+  - emoji={emoji}                    # optional visual hint
+
+STYLE:
+- Audience: general readers; friendly, non-dogmatic.
+- Output: CommonMark Markdown only (no HTML, no Telegram escaping).
+- Use REAL line breaks (never write "\n" or "nn").
+- Lists must use the bullet "• " (U+2022) at the line start.
+- No numbered or "#" headings. Keep it concise (~1800–2200 chars).
+
+INSTRUCTIONS:
+- Write English content about the {name} aspect.
+- Use EXACT section titles, each on its own line in **bold** (no numbering, no extra punctuation):
+  **Overview**
+  **Essentials**
+  **Dynamics & Keywords**
+  **Strengths**
+  **Challenges**
+  **Love & Relationships**
+  **Career & Growth**
+  **Reading Tips**
+  **Tip of the day**
+- Section order (blank line between sections):
+  **Overview** — 2–3 sentences describing the typical feel of {name} ({symbol}{glyph?} at {angle_deg}°).
+  **Essentials** — one line with bold labels:
+    **Angle:** {angle_deg}° · **Nature:** {nature} · **Orbs:** natal {orb_natal}°, transit {orb_transit}°
+  **Dynamics & Keywords** — 4–6 bullets (core dynamics/keywords).
+  **Strengths** — 3–5 bullets (what it supports).
+  **Challenges** — 3–5 bullets (frame as growth opportunities).
+  **Love & Relationships** — 3–5 bullets (how it colors relating).
+  **Career & Growth** — 3–5 bullets (work, goals, learning).
+  **Reading Tips** — 3–5 bullets (how to interpret in natal vs transit; context matters).
+  **Tip of the day** — 1–2 sentence advice/affirmation.
+- Avoid medical/financial promises.
+
+OUTPUT: Return only the markdown content, no JSON wrapping, no code fences.

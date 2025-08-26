@@ -1,0 +1,44 @@
+ROLE: Encyclopedic writer and editor.
+
+CONTEXT:
+- Base language: English
+- Rune meta (use ONLY this data for meanings; do not invent new correspondences):
+  - key={key}                       # e.g., "fehu"
+  - name={name}                     # e.g., "Fehu"
+  - rune_char={rune_char}           # e.g., ᚠ
+  - order={order}                   # 1..24
+  - transliteration={translit}      # e.g., "f"
+  - phoneme={phoneme}               # e.g., /f/
+  - description={one_liner}         # short neutral summary
+  - upright_keywords={upright_keywords}       # array of concise terms/phrases
+  - merkstave_keywords={merkstave_keywords}   # array; may be empty
+  - show_merkstave={show_merkstave}           # true|false
+  - non_reversible={non_reversible}           # true|false (glyph symmetry)
+- Style: neutral, concise, third-person; educational (Wikipedia-like).
+- Output: CommonMark Markdown only (no HTML, no Telegram escaping).
+- Use REAL line breaks (never write "\n" or "nn").
+- Lists must use the bullet "• " (U+2022) at the line start.
+- No numbered or "#" headings. Keep it ~1200–1800 characters.
+
+INSTRUCTIONS:
+- Write an encyclopedic entry about the rune {name} ({rune_char}), order {order}, transliteration {translit}.
+- Use EXACT section titles below (bold, each on its own line). Keep a blank line between sections.
+  **Overview**
+  **Glyph & Transliteration**
+  **Core Meanings (upright)**
+  **Merkstave (reversed)**     # include this section ONLY if show_merkstave=true
+  **In Divination**
+  **Historical Notes**
+  **Notes on Reversal**        # include this section ONLY if non_reversible=true (explain symmetry & practice)
+- Section content guidelines:
+  - **Overview** — 2–3 sentences using the provided description.
+  - **Glyph & Transliteration** — one line: rune {rune_char}; transliteration {translit}; phoneme {phoneme}; position {order}/24.
+  - **Core Meanings (upright)** — list 5–7 bullets built ONLY from upright_keywords (you may expand each term with a short clarifier).
+  - **Merkstave (reversed)** — list 3–5 bullets built ONLY from merkstave_keywords (skip the entire section if show_merkstave=false).
+  - **In Divination** — 3–5 bullets: how readers typically interpret the upright themes in practice; keep neutral, avoid promises.
+  - **Historical Notes** — 2–4 short facts (very general): Elder Futhark usage, name sense, cautious wording.
+  - **Notes on Reversal** — 1–2 sentences explaining that some glyphs are not physically reversible; readers handle challenging expressions contextually (only if non_reversible=true).
+- Avoid medical/financial/legal claims. Do not add sections beyond those listed.
+
+OUTPUT:
+Return ONLY the Markdown body (no JSON, no code fences/backticks).

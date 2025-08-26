@@ -59,7 +59,46 @@ class UniversalGenerator:
         except json.JSONDecodeError:
             raise ValueError(f"Invalid JSON in data config: {data_path}")
     
-    def fill_template_placeholders(self, template: str, data_item: Dict[str, Any], config_data: Dict[str, Any] = None) -> str:
+    def extract_title_from_markdown(self, markdown_content: str, key: str) -> str:
+        """Extract title from markdown content or generate default title"""
+        lines = markdown_content.strip().split('\n')
+        
+        # Look for first **bold** text which might be a title
+        for line in lines[:5]:  # Check first 5 lines
+            if line.strip().startswith('**') and line.strip().endswith('**'):
+                potential_title = line.strip()[2:-2]  # Remove ** markers
+                if len(potential_title) > 5 and len(potential_title) < 100:
+                    return potential_title
+        
+        # If no title found, generate one based on key
+        return f"{key.replace('_', ' ').title()} Aspect"
+
+    def extract_oneliner_from_markdown(self, markdown_content: str) -> str:
+        """Extract a one-liner from markdown content"""
+        lines = markdown_content.strip().split('\n')
+        
+        # Look for first substantial sentence after Overview
+        overview_found = False
+        for line in lines:
+            if '**Overview**' in line:
+                overview_found = True
+                continue
+            if overview_found and line.strip() and not line.startswith('**'):
+                # Get first sentence
+                sentences = line.strip().split('.')
+                if sentences and len(sentences[0]) > 10:
+                    return sentences[0] + '.'
+        
+        # Fallback: use first substantial line
+        for line in lines:
+            if line.strip() and not line.startswith('**') and len(line.strip()) > 20:
+                sentences = line.strip().split('.')
+                if sentences:
+                    return sentences[0] + '.'
+        
+        return "Explore the cosmic influence of this aspect."
+
+    def fill_template_placeholders(self, template: str, data_item: Dict[str, Any], data_config: List[Dict[str, Any]]) -> str:
         """Fill template placeholders with data from item"""
         filled_template = template
         
@@ -170,11 +209,21 @@ class UniversalGenerator:
                         response = f'{{"debug": true, "key": "{key}", "prompt_shown": true}}'
                     else:
                         # Normal mode: send to LLM
-                        response = await client.make_request(
+                        markdown_response = await client.make_request(
                             prompt=filled_prompt,
                             temperature=self.settings.openai_temperature,
                             max_tokens=self.settings.openai_max_tokens
                         )
+                        
+                        # Create JSON structure from markdown response
+                        title = self.extract_title_from_markdown(markdown_response, key)
+                        one_liner = self.extract_oneliner_from_markdown(markdown_response)
+                        
+                        response = json.dumps({
+                            "title": title,
+                            "one_liner": one_liner,
+                            "body_md": markdown_response.strip()
+                        }, ensure_ascii=False)
                     
                     # Add to results
                     results.append({

@@ -1,0 +1,125 @@
+{
+  "aspects": [
+    {
+      "key": "conjunction",
+      "name": "Conjunction",
+      "angle_deg": 0,
+      "nature": "neutral",
+      "orb_natal": 8,
+      "orb_transit": 3,
+      "symbol": "0°",
+      "glyph": "☌",
+      "emoji": "⚪️"
+    },
+    {
+      "key": "sextile",
+      "name": "Sextile",
+      "angle_deg": 60,
+      "nature": "harmonious",
+      "orb_natal": 4,
+      "orb_transit": 1,
+      "symbol": "60°",
+      "glyph": "⚹",
+      "emoji": "🟢"
+    },
+    {
+      "key": "square",
+      "name": "Square",
+      "angle_deg": 90,
+      "nature": "challenging",
+      "orb_natal": 6,
+      "orb_transit": 2,
+      "symbol": "90°",
+      "glyph": "□",
+      "emoji": "🟥"
+    },
+    {
+      "key": "trine",
+      "name": "Trine",
+      "angle_deg": 120,
+      "nature": "harmonious",
+      "orb_natal": 6,
+      "orb_transit": 2,
+      "symbol": "120°",
+      "glyph": "△",
+      "emoji": "🟢"
+    },
+    {
+      "key": "opposition",
+      "name": "Opposition",
+      "angle_deg": 180,
+      "nature": "challenging",
+      "orb_natal": 8,
+      "orb_transit": 2,
+      "symbol": "180°",
+      "glyph": "☍",
+      "emoji": "🟥"
+    },
+    {
+      "key": "quincunx",
+      "name": "Quincunx (Inconjunct)",
+      "angle_deg": 150,
+      "nature": "mixed",
+      "orb_natal": 3,
+      "orb_transit": 1,
+      "symbol": "150°",
+      "glyph": null,
+      "emoji": "🟡"
+    },
+    {
+      "key": "semisextile",
+      "name": "Semi-sextile",
+      "angle_deg": 30,
+      "nature": "harmonious",
+      "orb_natal": 2,
+      "orb_transit": 1,
+      "symbol": "30°",
+      "glyph": null,
+      "emoji": "🟢"
+    },
+    {
+      "key": "semisquare",
+      "name": "Semi-square",
+      "angle_deg": 45,
+      "nature": "challenging",
+      "orb_natal": 2,
+      "orb_transit": 1,
+      "symbol": "45°",
+      "glyph": null,
+      "emoji": "🟥"
+    },
+    {
+      "key": "sesquisquare",
+      "name": "Sesqui-square",
+      "angle_deg": 135,
+      "nature": "challenging",
+      "orb_natal": 2,
+      "orb_transit": 1,
+      "symbol": "135°",
+      "glyph": null,
+      "emoji": "🟥"
+    },
+    {
+      "key": "quintile",
+      "name": "Quintile",
+      "angle_deg": 72,
+      "nature": "harmonious",
+      "orb_natal": 2,
+      "orb_transit": 1,
+      "symbol": "72°",
+      "glyph": null,
+      "emoji": "🟢"
+    },
+    {
+      "key": "biquintile",
+      "name": "Bi-quintile",
+      "angle_deg": 144,
+      "nature": "harmonious",
+      "orb_natal": 2,
+      "orb_transit": 1,
+      "symbol": "144°",
+      "glyph": null,
+      "emoji": "🟢"
+    }
+  ]
+}
