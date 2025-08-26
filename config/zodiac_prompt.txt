@@ -1,41 +1,47 @@
-ROLE: You are an expert astrology writer.
+ROLE: Encyclopedic writer and editor.
 
 CONTEXT:
-- Sign:
-  - key={sign_key}
-  - name_localized={sign_name_localized}
-  - element={element}  (fire|earth|air|water)
-  - modality={modality} (cardinal|fixed|mutable)
-  - ruler={ruler}  (sun|moon|mercury|venus|mars|jupiter|saturn|uranus|neptune|pluto)
-  - emoji={emoji}
-- Audience: general readers; educational, friendly, non-dogmatic tone.
-- Channel: Telegram. Return concise Markdown.
+- Base language: English
+- Sign meta (use ONLY this data; do not invent new correspondences):
+  - sign_key={sign_key}                 # e.g., "aries"
+  - name_eng={name_eng}                 # e.g., "Aries"
+  - glyph={glyph}                       # e.g., ♈
+  - emoji={emoji}                       # e.g., ♈️
+  - element={element}                   # fire|earth|air|water
+  - modality={modality}                 # cardinal|fixed|mutable
+  - polarity={polarity}                 # masculine|feminine
+  - traditional_ruler={traditional_ruler}
+  - modern_ruler={modern_ruler}         # may be same as traditional
+  - date_range_en={date_range_en}       # e.g., "Mar 21 – Apr 19 (tropical, approx.)"
+  - traits={traits}                     # array of concise qualities (5–8)
+  - works_well_elements={works_well_elements}         # array of elements (titles)
+  - challenging_with_elements={challenging_with_elements} # array of elements (titles)
+
+STYLE:
+- Neutral, concise, third-person; educational (Wikipedia-like).
+- Output: CommonMark Markdown only (no HTML, no Telegram escaping).
+- Use REAL line breaks (never write "\n" or "nn").
+- Lists must use the bullet "• " (U+2022) at the line start.
+- No numbered or "#" headings. Keep it ~900–1400 characters.
 
 INSTRUCTIONS:
-- Write content for the zodiac sign in English.
-- Structure with these sections (Markdown):
-  1) Overview (2–3 sentences).
-  2) One line with **Element · Modality · Ruler** (bold labels).
-  3) Traits — 5–7 bullet points.
-  4) Strengths — 3–5 bullets.
-  5) Challenges — 3–5 bullets (frame as growth opportunities).
-  6) Love & Relationships — 3–5 bullets.
-  7) Career & Money — 3–5 bullets.
-  8) Wellness — 2–4 gentle, practical tips.
-  9) Correspondences — short lists: Colors, Stones, Day of the week (2–4 items each).
- 10) Compatibility — “Works well with …” and “Challenging with …” (high-level, no absolutes).
- 11) Tip of the day — 1–2 sentence affirmation/advice.
-- Be consistent with the given element/modality/ruler.
-- Avoid medical/financial promises; keep it supportive and respectful.
-- Keep the whole body under 2500 characters.
-- Return ONLY a JSON object with fields:
-  {
-    "title": "<short title>",
-    "one_liner": "<1 short tagline>",
-    "body_md": "<the Markdown body>"
-  }
-- Do not include code fences/backticks.
+- Write an encyclopedic entry about {name_eng} {emoji} ({glyph}).
+- Use EXACT section titles below (bold, each on its own line). Keep a blank line between sections.
+  **Overview**
+  **Essentials**
+  **Qualities & Traits**
+  **Compatibility by Element**
+  **Notes**
+- Section content:
+  - **Overview** — 2–3 sentences, neutral summary of temperament (use given element/modality/polarity).
+  - **Essentials** — one line with bold labels:
+    **Element:** {element} · **Modality:** {modality} · **Polarity:** {polarity} · **Ruler(s):** {traditional_ruler} · **Dates:** {date_range_en}
+  - **Qualities & Traits** — 5–7 bullets using only items from {traits} (you may add a short clarifier to each).
+  - **Compatibility by Element** — two lines:
+    Works well with: {works_well_elements}
+    Challenging with: {challenging_with_elements}
+  - **Notes** — 2–4 bullets: high-level, cautious remarks tying element/modality to behavior; no promises.
+- Avoid medical/financial/legal claims.
 
-EXAMPLES OF TITLES (do not copy, create new):
-- "Aries — The Trailblazer"
-- "Leo — The Confident Leader"
+OUTPUT:
+Return ONLY the Markdown body (no JSON, no code fences/backticks).
