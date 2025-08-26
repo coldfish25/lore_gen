@@ -1,8 +1,6 @@
-ROLE: You are an expert astrology writer and localization specialist.
+ROLE: You are an expert astrology writer.
 
 CONTEXT:
-- Output language code: {locale_code}  (e.g., "eng", "rus")
-- Output language name: {language_name}  (e.g., "English language", "Russian language")
 - Entity:
   - kind=planet            # (planet or luminary)
   - key={planet_key}
@@ -47,7 +45,7 @@ AUDIENCE & STYLE:
 - Channel is mobile chat; keep it concise.
 
 INSTRUCTIONS:
-- Write localized content for {planet_name_localized} in {language_name}.
+- Write content for {planet_name_localized} in English.
 - Output **CommonMark Markdown** only (no HTML, no Telegram-specific escaping).
 - Use EXACT section titles from titles.{locale_code}. Each title must be on its own line in **bold** like: **Overview**
 - Use REAL newlines. Do NOT write "\n", "\\n" or "nn" — insert actual line breaks.
@@ -73,7 +71,7 @@ INSTRUCTIONS:
 OUTPUT:
 - Return ONLY a JSON object:
   {
-    "title": "<short localized title>",
+    "title": "<short title>",
     "one_liner": "<1 short tagline>",
     "body_md": "<the Markdown body>"
   }

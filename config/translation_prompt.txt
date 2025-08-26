@@ -1,0 +1,19 @@
+TASK:
+Translate the following JSON content into {target_lang_name}.
+
+STRICT RULES:
+1) Translate ONLY the text values: "title", "one_liner", and "body_md" fields.
+2) Keep JSON structure EXACTLY unchanged.
+3) For "body_md" field: preserve Markdown structure EXACTLY: section order, blank lines, list counts.
+4) Keep all Markdown tokens and symbols unchanged: **, *, _, [, ], (, ), `, ~, >, #, +, -, =, |, {, }, ., !, emojis.
+5) Keep the bullet character as is: "• " at line start.
+6) Do NOT output "\n" or "nn"; use real newlines in body_md.
+7) Do NOT add/remove sections, punctuation, or emojis.
+8) Do NOT wrap output in code fences.
+9) Return valid JSON with proper escaping.
+
+OUTPUT:
+Return ONLY the translated JSON object.
+
+CONTENT TO TRANSLATE:
+{content}

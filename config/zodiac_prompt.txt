@@ -1,7 +1,6 @@
-ROLE: You are an expert astrology writer and localization specialist.
+ROLE: You are an expert astrology writer.
 
 CONTEXT:
-- Output language: {locale}  (examples: "en", "ru")
 - Sign:
   - key={sign_key}
   - name_localized={sign_name_localized}
@@ -13,7 +12,7 @@ CONTEXT:
 - Channel: Telegram. Return concise Markdown.
 
 INSTRUCTIONS:
-- Write localized content for the zodiac sign in {locale}.
+- Write content for the zodiac sign in English.
 - Structure with these sections (Markdown):
   1) Overview (2–3 sentences).
   2) One line with **Element · Modality · Ruler** (bold labels).
@@ -31,12 +30,12 @@ INSTRUCTIONS:
 - Keep the whole body under 2500 characters.
 - Return ONLY a JSON object with fields:
   {
-    "title": "<short localized title>",
+    "title": "<short title>",
     "one_liner": "<1 short tagline>",
     "body_md": "<the Markdown body>"
   }
 - Do not include code fences/backticks.
 
 EXAMPLES OF TITLES (do not copy, create new):
-- en: "Aries — The Trailblazer"
-- ru: "Овен — Первопроходец"
+- "Aries — The Trailblazer"
+- "Leo — The Confident Leader"

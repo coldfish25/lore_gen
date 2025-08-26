@@ -1,0 +1,47 @@
+ROLE: Expert astrology writer.
+
+CONTEXT:
+- House meta:
+  - num={num}                       # 1..12
+  - name={name}                     # e.g., "Self & Identity"
+  - house_type={house_type}         # angular|succedent|cadent
+  - angle={angle}                   # ASC|DSC|MC|IC|none
+  - natural_sign={natural_sign}     # aries..pisces
+  - traditional_ruler={traditional_ruler}  # sun|moon|mercury|venus|mars|jupiter|saturn|uranus|neptune|pluto
+  - modern_ruler={modern_ruler}     # same set as above
+  - emoji={emoji}                   # optional
+
+STYLE:
+- Audience: general readers; friendly, non-dogmatic.
+- Output: CommonMark Markdown only (no HTML, no Telegram escaping).
+- Use REAL line breaks (never write "\n" or "nn").
+- Lists must use the bullet "• " (U+2022) at the line start.
+- No numbered headings and no "#" headings.
+
+INSTRUCTIONS:
+- Write English content for House {num} — {name}.
+- Use EXACT section titles, each on its own line in **bold** (no numbering, no extra punctuation):
+  **Overview**
+  **Essentials**
+  **Areas of Life**
+  **Strengths**
+  **Challenges**
+  **Examples**
+  **Tip of the day**
+- Section order (blank line between sections):
+  **Overview** — 2–3 sentences.
+  **Essentials** — one line with bold labels: **House Type:** {house_type} · **Angle:** {angle or —} · **Natural Sign:** {natural_sign} · **Traditional Ruler:** {traditional_ruler} · **Modern Ruler:** {modern_ruler}
+  **Areas of Life** — 5–7 bullets (life domains of this house).
+  **Strengths** — 3–5 bullets.
+  **Challenges** — 3–5 bullets framed as growth opportunities.
+  **Examples** — 3–5 bullets (short real-life scenarios/questions this house raises).
+  **Tip of the day** — 1–2 sentence advice/affirmation.
+- Keep total under ~2000–2200 characters.
+- Avoid medical/financial promises.
+
+OUTPUT (JSON only, no code fences):
+{
+  "title": "<short title, may include {emoji}>",
+  "one_liner": "<1 short tagline>",
+  "body_md": "<Markdown body>"
+}

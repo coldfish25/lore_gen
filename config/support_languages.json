@@ -1,8 +1,4 @@
 {
-  "eng": {
-    "name": "English language",
-    "locale": "eng"
-  },
   "rus": {
     "name": "Russian language",
     "locale": "rus"

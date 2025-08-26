@@ -24,22 +24,23 @@ async def main():
         
         # Generate zodiac data
         logger.info("Starting zodiac data generation")
-        zodiac_results = await generator.generate_data(
+        zodiac_output = await generator.generate_data(
             template_path="config/zodiac_prompt.txt",
             base_filename="zodiacs.json",
             data_path="config/zodiac.json"
         )
         
-        logger.info("Zodiac data generation completed")
-        for language, output_path in zodiac_results.items():
-            logger.info(f"Generated {language}: {output_path}")
+        logger.info(f"Zodiac data generation completed: {zodiac_output}")
         
-        # Future: Add more data types here
-        # planets_results = await generator.generate_data(
-        #     template_path="config/planets_prompt.txt",
-        #     base_filename="planets.json", 
-        #     data_path="config/planets.json"
-        # )
+        # Generate planets and luminaries data
+        logger.info("Starting planets and luminaries data generation")
+        planets_output = await generator.generate_data(
+            template_path="config/planets_luminaries.txt",
+            base_filename="planets_luminaries.json",
+            data_path="config/planets_luminaries.json"
+        )
+        
+        logger.info(f"Planets and luminaries data generation completed: {planets_output}")
         
         logger.info("All data generation completed successfully!")
         

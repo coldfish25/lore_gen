@@ -1,0 +1,124 @@
+{
+  "houses": [
+    {
+      "num": 1,
+      "name": "Self & Identity",
+      "house_type": "angular",
+      "angle": "ASC",
+      "natural_sign": "aries",
+      "traditional_ruler": "mars",
+      "modern_ruler": "mars",
+      "emoji": "🪞"
+    },
+    {
+      "num": 2,
+      "name": "Values & Resources",
+      "house_type": "succedent",
+      "angle": "none",
+      "natural_sign": "taurus",
+      "traditional_ruler": "venus",
+      "modern_ruler": "venus",
+      "emoji": "💰"
+    },
+    {
+      "num": 3,
+      "name": "Communication & Siblings",
+      "house_type": "cadent",
+      "angle": "none",
+      "natural_sign": "gemini",
+      "traditional_ruler": "mercury",
+      "modern_ruler": "mercury",
+      "emoji": "💬"
+    },
+    {
+      "num": 4,
+      "name": "Home & Roots",
+      "house_type": "angular",
+      "angle": "IC",
+      "natural_sign": "cancer",
+      "traditional_ruler": "moon",
+      "modern_ruler": "moon",
+      "emoji": "🏠"
+    },
+    {
+      "num": 5,
+      "name": "Creativity & Romance",
+      "house_type": "succedent",
+      "angle": "none",
+      "natural_sign": "leo",
+      "traditional_ruler": "sun",
+      "modern_ruler": "sun",
+      "emoji": "🎭"
+    },
+    {
+      "num": 6,
+      "name": "Habits, Health & Service",
+      "house_type": "cadent",
+      "angle": "none",
+      "natural_sign": "virgo",
+      "traditional_ruler": "mercury",
+      "modern_ruler": "mercury",
+      "emoji": "🧰"
+    },
+    {
+      "num": 7,
+      "name": "Partnerships & Contracts",
+      "house_type": "angular",
+      "angle": "DSC",
+      "natural_sign": "libra",
+      "traditional_ruler": "venus",
+      "modern_ruler": "venus",
+      "emoji": "⚖️"
+    },
+    {
+      "num": 8,
+      "name": "Shared Resources & Transformation",
+      "house_type": "succedent",
+      "angle": "none",
+      "natural_sign": "scorpio",
+      "traditional_ruler": "mars",
+      "modern_ruler": "pluto",
+      "emoji": "🗝️"
+    },
+    {
+      "num": 9,
+      "name": "Beliefs, Travel & Higher Learning",
+      "house_type": "cadent",
+      "angle": "none",
+      "natural_sign": "sagittarius",
+      "traditional_ruler": "jupiter",
+      "modern_ruler": "jupiter",
+      "emoji": "🌍"
+    },
+    {
+      "num": 10,
+      "name": "Career & Public Life",
+      "house_type": "angular",
+      "angle": "MC",
+      "natural_sign": "capricorn",
+      "traditional_ruler": "saturn",
+      "modern_ruler": "saturn",
+      "emoji": "🏛️"
+    },
+    {
+      "num": 11,
+      "name": "Community & Aspirations",
+      "house_type": "succedent",
+      "angle": "none",
+      "natural_sign": "aquarius",
+      "traditional_ruler": "saturn",
+      "modern_ruler": "uranus",
+      "emoji": "👥"
+    },
+    {
+      "num": 12,
+      "name": "Inner World & Closure",
+      "house_type": "cadent",
+      "angle": "none",
+      "natural_sign": "pisces",
+      "traditional_ruler": "jupiter",
+      "modern_ruler": "neptune",
+      "emoji": "🌊"
+    }
+  ]
+}

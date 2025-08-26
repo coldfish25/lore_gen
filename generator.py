@@ -39,9 +39,11 @@ class UniversalGenerator:
                 # Simple array format (like zodiac.json)
                 return data
             elif isinstance(data, dict):
-                # Complex format (like planets_luminaries.json)
+                # Complex format (like planets_luminaries.json or houses.json)
                 if "planets" in data:
                     return data["planets"]
+                elif "houses" in data:
+                    return data["houses"]
                 elif "data" in data:
                     return data["data"]
                 else:
@@ -57,26 +59,16 @@ class UniversalGenerator:
         except json.JSONDecodeError:
             raise ValueError(f"Invalid JSON in data config: {data_path}")
     
-    def fill_template_placeholders(self, template: str, data_item: Dict[str, Any], language_code: str = None, config_data: Dict[str, Any] = None) -> str:
+    def fill_template_placeholders(self, template: str, data_item: Dict[str, Any], config_data: Dict[str, Any] = None) -> str:
         """Fill template placeholders with data from item"""
         filled_template = template
         
-        # Add language information from languages.json
-        if language_code:
-            languages_config = self.settings.load_languages()
-            if language_code in languages_config:
-                lang_info = languages_config[language_code]
-                filled_template = filled_template.replace("{language_name}", lang_info["name"])
-                filled_template = filled_template.replace("{locale_code}", lang_info["locale"])
-                # Also support old format
-                filled_template = filled_template.replace("{name}", lang_info["name"])
-                filled_template = filled_template.replace("{locale}", lang_info["locale"])
-        
         # Handle special planet data structure
-        if "names" in data_item and language_code:
+        if "names" in data_item:
             planet_names = data_item["names"]
-            if language_code in planet_names:
-                filled_template = filled_template.replace("{planet_name_localized}", planet_names[language_code])
+            # Use English name as default
+            if "eng" in planet_names:
+                filled_template = filled_template.replace("{planet_name_localized}", planet_names["eng"])
             
             # Add planet-specific fields
             for key, value in data_item.items():
@@ -102,13 +94,13 @@ class UniversalGenerator:
         
         return filled_template
     
-    def get_output_filename(self, language_code: str, base_filename: str) -> str:
-        """Generate output filename with language prefix"""
+    def get_output_filename(self, base_filename: str) -> str:
+        """Generate output filename with eng prefix"""
         # Remove .json extension if present
         if base_filename.endswith('.json'):
             base_filename = base_filename[:-5]
         
-        return f"{language_code}_{base_filename}.json"
+        return f"eng_{base_filename}.json"
     
     def check_file_exists(self, filepath: str) -> bool:
         """Check if output file already exists"""
@@ -118,125 +110,104 @@ class UniversalGenerator:
         self,
         template_path: str,
         base_filename: str,
-        data_path: str,
-        languages: Optional[List[str]] = None
-    ) -> Dict[str, str]:
+        data_path: str
+    ) -> str:
         """
-        Generate data for all languages and data items
+        Generate data for the specified template and data
         
         Args:
             template_path: Path to prompt template file
             base_filename: Base name for output files
             data_path: Path to data configuration JSON
-            languages: List of language codes to process (if None, use all from config)
         
         Returns:
-            Dict mapping language codes to output file paths
+            Output file path
         """
         # Load configurations
         prompt_template = self.load_prompt_template(template_path)
         data_config = self.load_data_config(data_path)
-        languages_config = self.settings.load_languages()
         
-        if languages is None:
-            languages = list(languages_config.keys())
+        output_filename = self.get_output_filename(base_filename)
+        output_path = os.path.join(self.settings.output_dir, output_filename)
         
-        results = {}
+        # Check if file already exists
+        if self.check_file_exists(output_path):
+            self.logger.info(f"File {output_path} already exists, skipping")
+            return output_path
         
-        # Process each language
-        for language_code in languages:
-            if language_code not in languages_config:
-                self.logger.warning(f"Language {language_code} not found in config, skipping")
-                continue
+        self.logger.info(f"Generating English data for: {base_filename}")
+        
+        if self.settings.debug_mode:
+            self.logger.info("🔧 DEBUG MODE включен - промпты выводятся в консоль, запросы в LLM не отправляются")
+        else:
+            self.logger.info("🌍 Отправляем запросы в LLM")
+        
+        # Process all data items
+        results = []
+        
+        async with LLMClient(
+            api_key=self.settings.openai_api_key,
+            model=self.settings.openai_model
+        ) as client:
             
-            output_filename = self.get_output_filename(language_code, base_filename)
-            output_path = os.path.join(self.settings.output_dir, output_filename)
-            
-            # Check if file already exists
-            if self.check_file_exists(output_path):
-                self.logger.info(f"File {output_path} already exists, skipping")
-                results[language_code] = output_path
-                continue
-            
-            self.logger.info(f"Generating data for language: {language_code}")
-            
-            if self.settings.debug_mode:
-                self.logger.info("🔧 DEBUG MODE включен - промпты выводятся в консоль, запросы в LLM не отправляются")
-            else:
-                self.logger.info("� Отправляем запросы в LLM")
-            
-            # Process all data items for this language
-            language_results = []
-            
-            async with LLMClient(
-                api_key=self.settings.openai_api_key,
-                model=self.settings.openai_model
-            ) as client:
+            for i, data_item in enumerate(data_config):
+                key = data_item.get('key', data_item.get('num', f'item_{i}'))
+                self.logger.info(f"Processing {key}")
                 
-                for i, data_item in enumerate(data_config):
-                    key = data_item.get('key', f'item_{i}')
-                    self.logger.info(f"Processing {key} for {language_code}")
-                    
-                    # Fill template with data
-                    filled_prompt = self.fill_template_placeholders(prompt_template, data_item, language_code, data_config)
-                    
-                    # Add language instruction
-                    language_instruction = self.settings.get_language_description(language_code)
-                    final_prompt = f"{language_instruction}\n\n{filled_prompt}"
-                    
-                    try:
-                        if self.settings.debug_mode:
-                            # Debug mode: show prompt and don't send to LLM
-                            print(f"\n{'='*60}")
-                            print(f"DEBUG PROMPT для {key} ({language_code}):")
-                            print(f"{'='*60}")
-                            print(final_prompt)
-                            print(f"{'='*60}\n")
-                            
-                            self.logger.info(f"DEBUG: Промпт показан для {key}, запрос в LLM пропущен")
-                            response = f'{{"debug": true, "key": "{key}", "language": "{language_code}", "prompt_shown": true}}'
-                        else:
-                            # Normal mode: send to LLM without showing prompt
-                            response = await client.make_request(
-                                prompt=final_prompt,
-                                temperature=self.settings.openai_temperature,
-                                max_tokens=self.settings.openai_max_tokens
-                            )
+                # Fill template with data
+                filled_prompt = self.fill_template_placeholders(prompt_template, data_item, data_config)
+                
+                try:
+                    if self.settings.debug_mode:
+                        # Debug mode: show prompt and don't send to LLM
+                        print(f"\n{'='*60}")
+                        print(f"DEBUG PROMPT для {key}:")
+                        print(f"{'='*60}")
+                        print(filled_prompt)
+                        print(f"{'='*60}\n")
                         
-                        # Add to results
-                        language_results.append({
-                            "key": key,
-                            "content": response.strip()
-                        })
+                        self.logger.info(f"DEBUG: Промпт показан для {key}, запрос в LLM пропущен")
+                        response = f'{{"debug": true, "key": "{key}", "prompt_shown": true}}'
+                    else:
+                        # Normal mode: send to LLM
+                        response = await client.make_request(
+                            prompt=filled_prompt,
+                            temperature=self.settings.openai_temperature,
+                            max_tokens=self.settings.openai_max_tokens
+                        )
+                    
+                    # Add to results
+                    results.append({
+                        "key": key,
+                        "content": response.strip()
+                    })
+                    
+                    if self.settings.debug_mode:
+                        self.logger.info(f"✅ DEBUG: Промпт протестирован для {key}")
+                    else:
+                        self.logger.info(f"✅ Successfully processed {key}")
+                    
+                    # Add delay between requests (only in normal mode, not in debug)
+                    if not self.settings.debug_mode and self.settings.delay_between_requests > 0:
+                        await asyncio.sleep(self.settings.delay_between_requests)
                         
-                        if self.settings.debug_mode:
-                            self.logger.info(f"✅ DEBUG: Промпт протестирован для {key}")
-                        else:
-                            self.logger.info(f"✅ Successfully processed {key}")
-                        
-                        # Add delay between requests (only in normal mode, not in debug)
-                        if not self.settings.debug_mode and self.settings.delay_between_requests > 0:
-                            await asyncio.sleep(self.settings.delay_between_requests)
-                            
-                    except Exception as e:
-                        self.logger.error(f"Error processing {key}: {str(e)}")
-                        language_results.append({
-                            "key": key,
-                            "content": f"Error: {str(e)}"
-                        })
-            
-            # Save results to file only if not in debug mode
-            if self.settings.debug_mode:
-                self.logger.info(f"🔧 DEBUG MODE: Файл НЕ создан для {language_code} (файлы не создаются в debug режиме)")
-            else:
-                self.save_results(language_results, output_path, language_code)
-                self.logger.info(f"Completed generation for {language_code}: {output_path}")
-            
-            results[language_code] = output_path
+                except Exception as e:
+                    self.logger.error(f"Error processing {key}: {str(e)}")
+                    results.append({
+                        "key": key,
+                        "content": f"Error: {str(e)}"
+                    })
         
-        return results
+        # Save results to file only if not in debug mode
+        if self.settings.debug_mode:
+            self.logger.info(f"🔧 DEBUG MODE: Файл НЕ создан (файлы не создаются в debug режиме)")
+        else:
+            self.save_results(results, output_path)
+            self.logger.info(f"Completed generation: {output_path}")
+        
+        return output_path
     
-    def save_results(self, results: List[Dict[str, Any]], output_path: str, language_code: str):
+    def save_results(self, results: List[Dict[str, Any]], output_path: str):
         """Save generated results to JSON file"""
         # Ensure output directory exists
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -244,7 +215,7 @@ class UniversalGenerator:
         # Prepare output data with metadata
         output_data = {
             "generated_at": self.get_current_timestamp(),
-            "language": language_code,
+            "language": "eng",
             "total_items": len(results),
             "data": results
         }
@@ -277,11 +248,10 @@ async def main():
     
     # Generate data
     try:
-        results = await generator.generate_data(template_path, base_filename, data_path)
+        output_path = await generator.generate_data(template_path, base_filename, data_path)
         
         print("Generation completed successfully!")
-        for language, output_path in results.items():
-            print(f"  {language}: {output_path}")
+        print(f"  Output: {output_path}")
             
     except Exception as e:
         print(f"Error during generation: {str(e)}")
