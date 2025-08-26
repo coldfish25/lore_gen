@@ -1,78 +1,64 @@
-ROLE: You are an expert astrology writer.
+ROLE: Encyclopedic writer and editor.
 
 CONTEXT:
-- Entity:
-  - kind=planet            # (planet or luminary)
-  - key={planet_key}
-  - name_localized={planet_name_localized}
-  - type={planet_type}     # luminary|inner|social|outer
-  - domiciles={domiciles}  # array of zodiac keys
-  - detriments={detriments}
-  - exaltation={exaltation} # zodiac key or null
-  - fall={fall}             # zodiac key or null
-  - day={planet_day}        # sunday|...|saturday|null
-  - emoji={emoji}
-- Section titles dictionary (use EXACTLY these titles, no numbering, no extra punctuation):
-  titles.eng = {
-    "overview": "Overview",
-    "dignities": "Dignities",
-    "domains": "Domains & Keywords",
-    "strengths": "Strengths",
-    "challenges": "Challenges",
-    "love": "Love & Relationships",
-    "career": "Career & Money",
-    "wellness": "Wellness",
-    "correspondences": "Correspondences",
-    "transits": "Transits & Timing",
-    "tip": "Tip of the day"
-  }
-  titles.rus = {
-    "overview": "Обзор",
-    "dignities": "Достоинства",
-    "domains": "Сферы и ключевые слова",
-    "strengths": "Сильные стороны",
-    "challenges": "Вызовы",
-    "love": "Любовь и отношения",
-    "career": "Карьера и деньги",
-    "wellness": "Благополучие",
-    "correspondences": "Соответствия",
-    "transits": "Транзиты и тайминг",
-    "tip": "Совет дня"
-  }
-
-AUDIENCE & STYLE:
-- General readers; educational, friendly, non-dogmatic tone.
-- Channel is mobile chat; keep it concise.
+- Base language: English
+- Planet meta (use ONLY this data for meanings/correspondences; do not invent new ones):
+  - key={key}                         # e.g., "sun"
+  - name_eng={name_eng}               # e.g., "Sun"
+  - glyph={glyph}                     # e.g., ☉
+  - emoji={emoji}                     # optional
+  - type={type}                       # luminary|inner|social|outer|centaur
+  - domiciles={domiciles}             # array of sign keys (e.g., ["leo"])
+  - detriments={detriments}           # array of sign keys
+  - exaltation={exaltation}           # sign key or None (if None/null, write "—" instead)
+  - fall={fall}                       # sign key or None (if None/null, write "—" instead)  
+  - day={day}                         # sunday|monday|...|saturday|None (if None/null, write "—" instead)
+  - domains_keywords={domains_keywords}         # 4–7 items
+  - strengths_keywords={strengths_keywords}     # 3–5 items
+  - challenges_keywords={challenges_keywords}   # 3–5 items
+  - love_keywords={love_keywords}               # 3–5 items
+  - career_keywords={career_keywords}           # 3–5 items
+  - transit_notes={transit_notes}               # 2–4 items
+  - correspondences={correspondences}           # object with colors, stones, day
+- Important: Replace any null/None values with "—" symbol in the output
+- For correspondences, extract colors and stones as comma-separated lists from the object
+- Style: neutral, concise, third-person; educational (Wikipedia-like).
+- Output: CommonMark Markdown only (no HTML, no Telegram escaping).
+- Use REAL line breaks (never write "\n" or "nn").
+- Lists must use the bullet "• " (U+2022) at the line start.
+- No numbered or "#" headings. Keep it ~1200–1800 characters.
 
 INSTRUCTIONS:
-- Write content for {planet_name_localized} in English.
-- Output **CommonMark Markdown** only (no HTML, no Telegram-specific escaping).
-- Use EXACT section titles from titles.{locale_code}. Each title must be on its own line in **bold** like: **Overview**
-- Use REAL newlines. Do NOT write "\n", "\\n" or "nn" — insert actual line breaks.
-- Lists must use the bullet "• " (U+2022) at line start, not "-" or "*".
-- Structure, in this exact order (blank line between sections):
-  **{titles.{locale_code}.overview}** — 2–3 sentences.
-  **{titles.{locale_code}.dignities}** — one line: **Domicile:** … · **Detriment:** … · **Exaltation:** … · **Fall:** … (use "—" if null).
-  **{titles.{locale_code}.domains}** — 4–6 bullets.
-  **{titles.{locale_code}.strengths}** — 3–5 bullets.
-  **{titles.{locale_code}.challenges}** — 3–5 bullets, framed as growth opportunities.
-  **{titles.{locale_code}.love}** — 3–5 bullets.
-  **{titles.{locale_code}.career}** — 3–5 bullets.
-  **{titles.{locale_code}.wellness}** — 2–4 bullets with gentle, practical tips.
-  **{titles.{locale_code}.correspondences}** — short lists in one block:
-    Colors: a, b
-    Stones: a, b
-    Day of the week: X      # omit this line if day=null
-  **{titles.{locale_code}.transits}** — 2–4 bullets (general effects).
-  **{titles.{locale_code}.tip}** — 1–2 sentence affirmation/advice.
-- Keep the whole body under 2500 characters.
-- Avoid medical/financial promises; keep it supportive and respectful.
+- Write an encyclopedic entry about {name_eng} {emoji} ({glyph}), a {type} planet.
+- Use EXACT section titles (bold, each on its own line). Keep a blank line between sections.
+  **Overview**
+  **Dignities**
+  **Domains & Keywords**
+  **Strengths**
+  **Challenges**
+  **Love & Relationships**
+  **Career & Growth**
+  **Transits & Timing**
+  **Correspondences**
+  **Historical Notes**
+  **Tip of the day**
+- Section content:
+  - **Overview** — 2–3 sentences summarizing the planet’s role using domains_keywords.
+  - **Dignities** — one line with bold labels (use "—" for null/None values):
+    **Domicile:** {domiciles} · **Detriment:** {detriments} · **Exaltation:** {exaltation} (or "—" if None/null) · **Fall:** {fall} (or "—" if None/null) · **Day:** {day} (or "—" if None/null)
+  - **Domains & Keywords** — 4–6 bullets from domains_keywords.
+  - **Strengths** — 3–5 bullets from strengths_keywords.
+  - **Challenges** — 3–5 bullets from challenges_keywords (frame as growth).
+  - **Love & Relationships** — 3–5 bullets from love_keywords.
+  - **Career & Growth** — 3–5 bullets from career_keywords.
+  - **Transits & Timing** — 2–4 bullets from transit_notes (general effects).
+  - **Correspondences** — short lines (extract from correspondences object):
+    Colors: [extract "colors" array from correspondences as comma-separated list]
+    Stones: [extract "stones" array from correspondences as comma-separated list]  
+    Day of the week: {day} (or "—" if null/None)
+  - **Historical Notes** — 2–4 cautious, general facts (e.g., traditional associations, modern use).
+  - **Tip of the day** — 1–2 sentence advice/affirmation aligned with the planet.
+- Avoid medical/financial/legal claims. Do not add sections beyond those listed.
 
 OUTPUT:
-- Return ONLY a JSON object:
-  {
-    "title": "<short title>",
-    "one_liner": "<1 short tagline>",
-    "body_md": "<the Markdown body>"
-  }
-- Do not include code fences/backticks.
+Return ONLY the Markdown body (no JSON, no code fences/backticks).

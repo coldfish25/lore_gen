@@ -1,170 +1,257 @@
 {
-  "section_titles": {
-    "eng": {
-      "overview": "Overview",
-      "domains": "Domains & Keywords",
-      "strengths": "Strengths",
-      "challenges": "Challenges",
-      "love": "Love & Relationships",
-      "career": "Career & Money",
-      "wellness": "Wellness",
-      "correspondences": "Correspondences",
-      "transits": "Transits & Timing",
-      "tip": "Tip of the day"
-    },
-    "rus": {
-      "overview": "Обзор",
-      "domains": "Сферы и ключевые слова",
-      "strengths": "Сильные стороны",
-      "challenges": "Вызовы",
-      "love": "Любовь и отношения",
-      "career": "Карьера и деньги",
-      "wellness": "Благополучие",
-      "correspondences": "Соответствия",
-      "transits": "Транзиты и тайминг",
-      "tip": "Совет дня"
-    }
-  },
   "planets": [
     {
       "key": "sun",
-      "names": { "eng": "Sun", "rus": "Солнце" },
+      "name_eng": "Sun",
+      "glyph": "☉",
+      "emoji": "☀️",
       "type": "luminary",
       "domiciles": ["leo"],
       "detriments": ["aquarius"],
       "exaltation": "aries",
       "fall": "libra",
       "day": "sunday",
-      "emoji": "☀️",
-      "colors": ["gold", "orange"],
-      "stones": ["sunstone", "tiger’s eye"],
-      "metals": ["gold"]
+      "domains_keywords": ["identity", "vitality", "ego and self-expression", "purpose", "creative force", "leadership"],
+      "strengths_keywords": ["confidence", "clarity", "generosity", "creative drive"],
+      "challenges_keywords": ["ego inflation", "self-centeredness", "need for recognition"],
+      "love_keywords": ["warmth", "loyalty", "celebrating the partner", "showing appreciation"],
+      "career_keywords": ["visibility", "leadership roles", "creative industries", "public recognition"],
+      "transit_notes": ["spotlights personal goals", "energizes visibility and confidence", "clarifies priorities"],
+      "correspondences": {
+        "colors": ["gold", "bright orange"],
+        "stones": ["sunstone", "citrine"],
+        "day": "sunday"
+      }
     },
     {
       "key": "moon",
-      "names": { "eng": "Moon", "rus": "Луна" },
+      "name_eng": "Moon",
+      "glyph": "☽",
+      "emoji": "🌙",
       "type": "luminary",
       "domiciles": ["cancer"],
       "detriments": ["capricorn"],
       "exaltation": "taurus",
       "fall": "scorpio",
       "day": "monday",
-      "emoji": "🌙",
-      "colors": ["silver", "white"],
-      "stones": ["moonstone", "selenite"],
-      "metals": ["silver"]
+      "domains_keywords": ["emotions", "needs and habits", "memory", "intuition", "care and nurturing"],
+      "strengths_keywords": ["empathy", "adaptability", "emotional intelligence", "protectiveness"],
+      "challenges_keywords": ["moodiness", "over-sensitivity", "clinginess"],
+      "love_keywords": ["bonding", "comfort", "emotional safety", "domestic closeness"],
+      "career_keywords": ["care work", "hospitality", "support roles", "rhythmic routines"],
+      "transit_notes": ["heightens sensitivity", "brings changing moods", "triggers habitual responses"],
+      "correspondences": {
+        "colors": ["silver", "white"],
+        "stones": ["moonstone", "selenite"],
+        "day": "monday"
+      }
     },
     {
       "key": "mercury",
-      "names": { "eng": "Mercury", "rus": "Меркурий" },
+      "name_eng": "Mercury",
+      "glyph": "☿",
+      "emoji": "🪙",
       "type": "inner",
       "domiciles": ["gemini", "virgo"],
       "detriments": ["sagittarius", "pisces"],
       "exaltation": "virgo",
       "fall": "pisces",
       "day": "wednesday",
-      "emoji": "☿",
-      "colors": ["yellow", "green"],
-      "stones": ["agate", "aventurine"],
-      "metals": ["mercury (quicksilver)"]
+      "domains_keywords": ["communication", "thinking and learning", "trade", "short travel", "data and analysis"],
+      "strengths_keywords": ["curiosity", "versatility", "articulation", "problem-solving"],
+      "challenges_keywords": ["scatter", "overthinking", "gossip", "nervousness"],
+      "love_keywords": ["dialogue", "wit", "shared ideas", "mental rapport"],
+      "career_keywords": ["writing", "analytics", "sales", "education", "tech support"],
+      "transit_notes": ["speeds up messages", "shifts focus to planning", "emphasizes logistics"],
+      "correspondences": {
+        "colors": ["yellow", "light grey"],
+        "stones": ["agate", "aventurine"],
+        "day": "wednesday"
+      }
     },
     {
       "key": "venus",
-      "names": { "eng": "Venus", "rus": "Венера" },
+      "name_eng": "Venus",
+      "glyph": "♀",
+      "emoji": "💞",
       "type": "inner",
       "domiciles": ["taurus", "libra"],
       "detriments": ["scorpio", "aries"],
       "exaltation": "pisces",
       "fall": "virgo",
       "day": "friday",
-      "emoji": "♀",
-      "colors": ["green", "pink"],
-      "stones": ["rose quartz", "emerald"],
-      "metals": ["copper"]
+      "domains_keywords": ["love and attraction", "harmony", "aesthetics and art", "values", "enjoyment"],
+      "strengths_keywords": ["diplomacy", "beauty sense", "affection", "cooperation"],
+      "challenges_keywords": ["indulgence", "avoidance of conflict", "vanity", "people-pleasing"],
+      "love_keywords": ["romance", "pleasure", "balance", "mutual appreciation"],
+      "career_keywords": ["design", "arts", "negotiation", "client relations", "finance of values"],
+      "transit_notes": ["softens edges", "attracts cooperation", "highlights tastes and values"],
+      "correspondences": {
+        "colors": ["green", "soft pink"],
+        "stones": ["rose quartz", "emerald"],
+        "day": "friday"
+      }
     },
     {
       "key": "mars",
-      "names": { "eng": "Mars", "rus": "Марс" },
+      "name_eng": "Mars",
+      "glyph": "♂",
+      "emoji": "🔥",
       "type": "inner",
       "domiciles": ["aries", "scorpio"],
       "detriments": ["libra", "taurus"],
       "exaltation": "capricorn",
       "fall": "cancer",
       "day": "tuesday",
-      "emoji": "♂",
-      "colors": ["red", "crimson"],
-      "stones": ["red jasper", "garnet"],
-      "metals": ["iron"]
+      "domains_keywords": ["action and drive", "assertion", "competition", "desire", "courage"],
+      "strengths_keywords": ["initiative", "bravery", "decisiveness", "stamina"],
+      "challenges_keywords": ["impulsiveness", "anger", "conflict", "impatience"],
+      "love_keywords": ["passion", "pursuit", "chemistry", "directness"],
+      "career_keywords": ["entrepreneurship", "military/sport", "operations", "emergency work"],
+      "transit_notes": ["energizes action", "pushes for decisions", "can inflame tempers"],
+      "correspondences": {
+        "colors": ["red", "scarlet"],
+        "stones": ["carnelian", "garnet"],
+        "day": "tuesday"
+      }
     },
     {
       "key": "jupiter",
-      "names": { "eng": "Jupiter", "rus": "Юпитер" },
+      "name_eng": "Jupiter",
+      "glyph": "♃",
+      "emoji": "🟣",
       "type": "social",
       "domiciles": ["sagittarius", "pisces"],
       "detriments": ["gemini", "virgo"],
       "exaltation": "cancer",
       "fall": "capricorn",
       "day": "thursday",
-      "emoji": "♃",
-      "colors": ["royal blue", "purple"],
-      "stones": ["amethyst", "lapis lazuli"],
-      "metals": ["tin"]
+      "domains_keywords": ["growth and expansion", "wisdom", "faith and optimism", "travel", "law and philosophy"],
+      "strengths_keywords": ["confidence", "big-picture vision", "generosity", "luck"],
+      "challenges_keywords": ["excess", "over-promising", "complacency", "waste"],
+      "love_keywords": ["goodwill", "forgiveness", "shared adventures", "support"],
+      "career_keywords": ["academia", "law", "publishing", "international work", "strategy"],
+      "transit_notes": ["opens opportunities", "amplifies themes it touches", "supports growth attempts"],
+      "correspondences": {
+        "colors": ["royal blue", "purple"],
+        "stones": ["amethyst", "lapis lazuli"],
+        "day": "thursday"
+      }
     },
     {
       "key": "saturn",
-      "names": { "eng": "Saturn", "rus": "Сатурн" },
+      "name_eng": "Saturn",
+      "glyph": "♄",
+      "emoji": "🪐",
       "type": "social",
       "domiciles": ["capricorn", "aquarius"],
       "detriments": ["cancer", "leo"],
       "exaltation": "libra",
       "fall": "aries",
       "day": "saturday",
-      "emoji": "♄",
-      "colors": ["black", "indigo"],
-      "stones": ["onyx", "obsidian"],
-      "metals": ["lead"]
+      "domains_keywords": ["structure", "discipline", "boundaries", "time and responsibility", "mastery"],
+      "strengths_keywords": ["endurance", "realism", "accountability", "craft"],
+      "challenges_keywords": ["fear", "rigidity", "delay", "pessimism"],
+      "love_keywords": ["commitment", "maturity", "clear agreements", "loyalty"],
+      "career_keywords": ["management", "engineering", "long-term planning", "compliance"],
+      "transit_notes": ["tests structures", "demands work and patience", "consolidates foundations"],
+      "correspondences": {
+        "colors": ["black", "dark grey"],
+        "stones": ["onyx", "obsidian"],
+        "day": "saturday"
+      }
     },
     {
       "key": "uranus",
-      "names": { "eng": "Uranus", "rus": "Уран" },
+      "name_eng": "Uranus",
+      "glyph": "♅",
+      "emoji": "⚡️",
       "type": "outer",
       "domiciles": ["aquarius"],
       "detriments": ["leo"],
       "exaltation": null,
       "fall": null,
       "day": null,
-      "emoji": "♅",
-      "colors": ["electric blue", "turquoise"],
-      "stones": ["labradorite", "fluorite"],
-      "metals": []
+      "domains_keywords": ["innovation", "sudden change", "individuality", "rebellion", "awakening"],
+      "strengths_keywords": ["originality", "ingenuity", "liberation", "future-focus"],
+      "challenges_keywords": ["disruption", "instability", "detachment"],
+      "love_keywords": ["space and freedom", "unconventional bonds", "surprises"],
+      "career_keywords": ["tech", "research", "startups", "reforms"],
+      "transit_notes": ["brings shocks and breakthroughs", "favors experimentation", "uproots stale patterns"],
+      "correspondences": {
+        "colors": ["electric blue", "turquoise"],
+        "stones": ["labradorite", "aquamarine"],
+        "day": "—"
+      }
     },
     {
       "key": "neptune",
-      "names": { "eng": "Neptune", "rus": "Нептун" },
+      "name_eng": "Neptune",
+      "glyph": "♆",
+      "emoji": "🌊",
       "type": "outer",
       "domiciles": ["pisces"],
       "detriments": ["virgo"],
       "exaltation": null,
       "fall": null,
       "day": null,
-      "emoji": "♆",
-      "colors": ["sea green", "azure"],
-      "stones": ["aquamarine", "opal"],
-      "metals": []
+      "domains_keywords": ["dreams and imagination", "spirituality", "compassion", "dissolution", "film/music/art"],
+      "strengths_keywords": ["inspiration", "empathy", "idealism"],
+      "challenges_keywords": ["confusion", "escapism", "deception", "blurred boundaries"],
+      "love_keywords": ["romance", "devotion", "mystique", "merging"],
+      "career_keywords": ["arts", "healing", "nonprofits", "oceanic or fluid fields"],
+      "transit_notes": ["softens boundaries", "heightens sensitivity", "can obscure facts"],
+      "correspondences": {
+        "colors": ["sea green", "indigo"],
+        "stones": ["aquamarine", "amethyst"],
+        "day": "—"
+      }
     },
     {
       "key": "pluto",
-      "names": { "eng": "Pluto", "rus": "Плутон" },
+      "name_eng": "Pluto",
+      "glyph": "♇",
+      "emoji": "🦂",
       "type": "outer",
       "domiciles": ["scorpio"],
       "detriments": ["taurus"],
       "exaltation": null,
       "fall": null,
       "day": null,
-      "emoji": "♇",
-      "colors": ["burgundy", "black"],
-      "stones": ["obsidian", "garnet"],
-      "metals": []
+      "domains_keywords": ["transformation", "power and control", "depth psychology", "taboo matters", "regeneration"],
+      "strengths_keywords": ["resilience", "focus", "fearless inquiry", "capacity for rebirth"],
+      "challenges_keywords": ["obsession", "power struggles", "compulsion", "extremes"],
+      "love_keywords": ["intensity", "loyalty through trials", "shadow work"],
+      "career_keywords": ["investigation", "forensics", "security", "turnaround work"],
+      "transit_notes": ["slow, profound metamorphosis", "exposes core issues", "demands surrender and renewal"],
+      "correspondences": {
+        "colors": ["maroon", "black"],
+        "stones": ["obsidian", "hematite"],
+        "day": "—"
+      }
+    },
+    {
+      "key": "chiron",
+      "name_eng": "Chiron",
+      "glyph": "⚷",
+      "emoji": "🗝️",
+      "type": "centaur",
+      "domiciles": [],
+      "detriments": [],
+      "exaltation": null,
+      "fall": null,
+      "day": null,
+      "domains_keywords": ["wounding and healing", "mentorship", "integration of vulnerabilities", "holistic learning"],
+      "strengths_keywords": ["wisdom through experience", "compassion", "teaching"],
+      "challenges_keywords": ["reopened wounds", "avoidance of pain", "self-doubt"],
+      "love_keywords": ["healing bonds", "gentle honesty", "shared growth"],
+      "career_keywords": ["counseling", "coaching", "education", "healing arts"],
+      "transit_notes": ["highlights areas needing care", "invites integration", "supports mentorship themes"],
+      "correspondences": {
+        "colors": ["teal", "soft green"],
+        "stones": ["chrysoprase", "malachite"],
+        "day": "—"
+      }
     }
   ]
 }
